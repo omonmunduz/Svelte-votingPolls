@@ -34,7 +34,6 @@
         justify-content: space-evenly;
         width: 100vw;
         background-color: #63D2FF;
-        position: fixed;
     }
     ul {
         list-style-type: none;
@@ -50,5 +49,14 @@
     div {
         padding: 5px;
         margin: 3em auto;
+    }
+
+    @media only screen and (max-width: 470px){
+        footer {
+            flex-direction: column;
+        }
+        div {
+            margin: 0.75em auto;
+        }
     }
 </style>
