@@ -1,10 +1,46 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
     import Button from '../shared/Button.svelte';
-    let fields = {question:'', answerA:'', answerB:''}
+
+    const dispatch = createEventDispatcher();
+
+    let fields = {question:'', answerA:'', answerB:''};
+    let errors = {question:'', answerA:'', answerB:''};
+    let valid = false;
+
+
 
     function handleSubmit() {
-        console.log(fields)
-    }
+        valid = true
+        // check question input
+        if(fields.question.trim().length < 5) {
+            valid = false;
+            errors.question = 'Question must be at least 5 chars long'
+        }else{
+            errors.question = ''
+        }
+        // check answer A input
+        if(fields.answerA.trim().length < 1) {
+            valid = false;
+            errors.answerA = 'Empty field'
+        }else{
+            errors.answerA = ''
+        }
+        // check answer B input
+        if(fields.answerB.trim().length < 1) {
+            valid = false;
+            errors.answerB = 'Empty field'
+        }else{
+            errors.answerB = ''
+        }
+        // if no errors
+        if(valid){
+             let poll = {...fields, id: Math.random(), votesA: 0, votesB: 0}
+             dispatch('addPoll', poll)
+        }
+    };
+
+
 </script>
 
 
@@ -12,14 +48,17 @@
     <div class="input-field">
         <label for="question">Poll Question: </label>
         <input type="text" id="question" bind:value={fields.question}>
+        <div class="error">{errors.question}</div>
     </div>
      <div class="input-field">
         <label for="answerA">Answer A value: </label>
         <input type="text" id="answerA" bind:value={fields.answerA}>
+        <div class="error">{errors.answerA}</div>
     </div>
      <div class="input-field">
         <label for="answerB">Answer A value: </label>
         <input type="text" id="answerB" bind:value={fields.answerB}>
+        <div class="error">{errors.answerB}</div>
     </div>
     <Button> Submit </Button>
 </form>
@@ -46,5 +85,9 @@
     label {
         margin: 10px auto;
         text-align: left;
+    }
+    .error {
+        font-weight: bold;
+        color: crimson;
     }
 </style>
