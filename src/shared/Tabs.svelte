@@ -33,8 +33,8 @@ import {createEventDispatcher} from "svelte";
     cursor: pointer;
   }
   .active{
-    color: #d91b42;
-    border-bottom: 2px solid #d91b42;
+    color: #2081C3;
+    border-bottom: 2px solid #63D2FF;
     padding-bottom: 8px;
   }
 </style>

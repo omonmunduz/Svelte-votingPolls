@@ -2,6 +2,7 @@
     <h1>
         <img src="/images/docs.svg" alt="Website logo">
     </h1>
+    
 </header>
 
 <style>
